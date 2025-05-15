@@ -31,6 +31,10 @@ export const button = {
   findByTitle: (buttonTitle: string): Cypress.Chainable => {
     return cy.findByText(buttonTitle).closest('button');
   },
+
+  findByShadowDom: (dataTestId: string): Cypress.Chainable => {
+    return cy.get(dataTestId).shadow().find('button');
+  },
 };
 
 /**

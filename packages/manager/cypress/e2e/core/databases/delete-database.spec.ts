@@ -54,7 +54,7 @@ describe('Delete database clusters', () => {
 
           // Click "Delete Cluster" button.
           ui.button
-            .findByAttribute('data-qa-settings-button', 'Delete Cluster')
+            .findByShadowDom('[data-qa-settings-button="Delete Cluster"]')
             .should('be.visible')
             .click();
 
@@ -117,7 +117,7 @@ describe('Delete database clusters', () => {
 
           // Click "Delete Cluster" button.
           ui.button
-            .findByAttribute('data-qa-settings-button', 'Delete Cluster')
+            .findByShadowDom('[data-qa-settings-button="Delete Cluster"]')
             .should('be.visible')
             .click();
 
