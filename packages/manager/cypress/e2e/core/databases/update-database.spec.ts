@@ -181,7 +181,7 @@ const modifyMaintenanceWindow = (label: string, windowValue: string) => {
 
   ui.autocomplete.findByLabel(label).should('be.visible').type(windowValue);
   cy.contains(windowValue).should('be.visible').click();
-  cy.get('[title="Save Changes"]')
+  cy.get('[data-testid="save-changes-button"]')
     .shadow()
     .find('button')
     .first()
@@ -242,20 +242,20 @@ describe('Update database clusters', () => {
 
           cy.findByText('Connection Details');
           // "Show" button should be enabled to reveal password when DB is active.
-          // ui.button
-          //   .findByShadowDom('Show')
-          //   .should('be.enabled')
-          //   .click();
+          ui.button
+            .findByShadowDom('[data-testid="show-hide-credentials"]')
+            .should('be.enabled')
+            .click();
 
-          // cy.wait('@getCredentials');
-          // cy.findByText(`${initialPassword}`);
+          cy.wait('@getCredentials');
+          cy.findByText(`${initialPassword}`);
 
-          // // "Hide" button should be enabled to hide password when password is revealed.
-          // ui.button
-          //   .findByShadowDom('Hide')
-          //   .should('be.visible')
-          //   .should('be.enabled')
-          //   .click();
+          // "Hide" button should be enabled to hide password when password is revealed.
+          ui.button
+            .findByShadowDom('[data-testid="show-hide-credentials"]')
+            .should('be.visible')
+            .should('be.enabled')
+            .click();
 
           mockUpdateDatabase(database.id, database.engine, {
             ...database,
@@ -376,10 +376,10 @@ describe('Update database clusters', () => {
           cy.findByText(hostnameRegex).should('be.visible');
 
           // DBaaS passwords cannot be revealed until database/cluster has provisioned.
-          // ui.button
-          //   .findByTitle('Show')
-          //   .should('be.visible')
-          //   .should('be.disabled');
+          ui.button
+            .findByShadowDom('[data-testid="show-hide-credentials"]')
+            .should('be.visible')
+            .should('be.disabled');
 
           // Navigate to "Settings" tab.
           ui.tabList.findTabByTitle('Settings').click();
