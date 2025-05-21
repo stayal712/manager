@@ -333,12 +333,10 @@ describe('restricted user cannot create database', () => {
     // table present for restricted user but its inputs will be disabled
     cy.get('table[aria-label="List of Linode Plans"]').should('exist');
     // Assert that Create Database button is visible and disabled
-    cy.get('[data-testid="create-database-cluster"]')
+    ui.cdsButton
+      .findButtonByTitle('Create Database Cluster')
       .should('be.visible')
-      .shadow()
-      .find('button')
-      .should('be.visible')
-      .and('be.disabled');
+      .should('be.disabled');
 
     // Info message is visible
     cy.findByText(
